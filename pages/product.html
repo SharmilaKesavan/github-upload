@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Choclate Shop</title>
+    <link rel="stylesheet" type="text/css" href="../CSS/Stylesheet.css">
+    <style>
+        table{ 
+  border-collapse:separate; 
+  border-spacing: 0 15px; 
+  } 
+  th{ 
+  background-color: #4287f5; 
+  color: white; 
+  } 
+  th,td{ 
+  width: 150px; 
+  text-align: center; 
+  border: 1px; 
+  padding: 5px;
+  }
+    </style>
+</head>
+<body>
+	
+<div class="header" id="myHeader">
+  <h2 align="center" style="color: red;font-family: veranda;font-size: 45px">Chocolate Shop</h2>
+  <a href="chocsearching.html" class="button button1">Search Chocolates</a>  
+  <a href="customer.html" class="button button1">Customer Details</a>  
+  </div>
+<center><button class="button button2" type="button" onclick="loadXMLDoc()">Choclate Products name</button>
+    <br><br>
+    <table id="demo"></table>
+    
+    <script>
+    function loadXMLDoc() {
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          myFunction(this);
+        }
+      };
+      xmlhttp.open("GET", "product.xml", true);
+      xmlhttp.send();
+    }
+    function myFunction(xml) {
+      var i;
+      var xmlDoc = xml.responseXML;
+      var table="<tr><th>Chocname</th><th>Brand</th></tr>";
+      var x = xmlDoc.getElementsByTagName("CD");
+      for (i = 0; i <x.length; i++) { 
+        table += "<tr><td>" +
+        x[i].getElementsByTagName("ARTIST")[0].childNodes[0].nodeValue +
+        "</td><td>" +
+        x[i].getElementsByTagName("TITLE")[0].childNodes[0].nodeValue +
+        "</td></tr>";
+      }
+      document.getElementById("demo").innerHTML = table;
+    }
+    </script>
+    </center>
+    
+<div class="footer">
+	Copyright By Sraj
+</div>
+</body>
+</html>
